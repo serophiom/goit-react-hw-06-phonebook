@@ -1,13 +1,22 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeFilter } from '../redux/contacts-actions';
 import './Filter.css';
 
-const Filter = ({ change, filter, contacts }) => {
+const Filter = () => {
+    const contacts = useSelector(state => state.contacts.items);
+    const filter = useSelector(state => state.contacts.filter);
+    const dispatch = useDispatch();
+
+
     function getFilteredName (event) {
         const { value } = event.currentTarget;
-        change(value);
+        handleFilter(value);
     }
+
+    const handleFilter = value => {
+        dispatch(changeFilter(value))
+    };
 
     return contacts.length !== 0 ? (
         <div>
@@ -27,10 +36,4 @@ const Filter = ({ change, filter, contacts }) => {
     )
 };
 
-Filter.propTypes = {
-    change: PropTypes.func.isRequired,
-    filter: PropTypes.string.isRequired,
-    contacts: PropTypes.array.isRequired
-}
-
-export default connect()(Filter);
+export default Filter;

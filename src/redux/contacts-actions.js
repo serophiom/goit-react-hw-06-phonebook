@@ -1,23 +1,16 @@
+import { createAction } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
-import types from './contacts-types';
 
-const addContact = (name, number) => ({
-    type: types.ADD,
+const addContact = createAction('contacts/add', ({name, number}) => ({
     payload: {
         id: uuidv4(),
         name,
         number,
-    }
-});
+    },
+}));
+const deleteContact = createAction('contacts/delete')
+const changeFilter = createAction('contacts/filter')
 
-const deleteContact = (contactId) => ({
-    types: types.DELETE,
-    payload: contactId,
-});
+export { addContact, deleteContact, changeFilter };
 
-const changeFilter = value => ({
-    type: types.FILTER,
-    payload: value,
-})
 
-export default { addContact, deleteContact };
