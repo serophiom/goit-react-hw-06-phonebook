@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import contactsActions from '../redux/contacts-actions';
 import FormAddContacts from '../FormAddContacts/FormAddContacts';
 import Contacts from '../Contacts/Contacts';
 import { v4 as uuidv4 } from 'uuid';
 import Filter from '../Filter/Filter';
 import './Phonebook.css';
 
-export default function Phonebook() {
+function Phonebook() {
     const [contacts, setContacts] = useState(
         JSON.parse(window.localStorage.getItem('contacts')) ?? 
             [{id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
@@ -25,6 +27,10 @@ export default function Phonebook() {
             alert(`${alreadyAddedContact.name} is already in contacts`);
             return;
         }
+
+        contactsActions.addContact(name, number);
+        // dispatch(contactsActions.addContact({ name, number }));
+
         setContacts ([...contacts, { id: uuidv4(), name, number }]);
     };
 
@@ -32,9 +38,9 @@ export default function Phonebook() {
         setFilter(value);
     };
 
-    const deleteContact = (contactId) => {
-        setContacts(contacts.filter(contact => contact.id !== contactId));
-    };
+    // const deleteContact = (contactId) => {
+    //     setContacts(contacts.filter(contact => contact.id !== contactId));
+    // };
 
     const toLowerCase = filter.toLowerCase();
     const showContacts = contacts.filter(contact =>
@@ -47,7 +53,18 @@ export default function Phonebook() {
             <FormAddContacts onSubmit={formSubmitHandler}/>
             <h2>Contacts</h2>
             <Filter change={handleFilter} filter={filter} contacts={contacts}/>
-            <Contacts contacts={contacts} showContacts={showContacts} onDeleteContact={deleteContact}/>
+            {/* <Contacts contacts={contacts} showContacts={showContacts} onDeleteContact={deleteContact}/> */}
+            <Contacts />
         </div>
     );
 }
+
+// const mapStateToProps = (state) => ({
+//     contacts: state.contacts.contacts,
+// })
+
+// const mapDispatchToProps = dispatch => ({
+//     onDeleteContact: (id) => dispatch(contactsActions.deleteContact(id)),        
+// })
+
+export default Phonebook;

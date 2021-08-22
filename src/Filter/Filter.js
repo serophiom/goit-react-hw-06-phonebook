@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './Filter.css';
 
@@ -32,4 +33,4 @@ Filter.propTypes = {
     contacts: PropTypes.array.isRequired
 }
 
-export default Filter;
+export default connect()(Filter);
