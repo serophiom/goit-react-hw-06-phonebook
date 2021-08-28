@@ -13,10 +13,10 @@ import {
 } from './contacts-actions';
 
 const items = createReducer([], {
-    [fetchContactsSuccess]: (_, { payload }) => payload,
-    [addContactSuccess]: (state, { payload }) => [...state, payload],
-    [deleteContactSuccess]: (state, { payload }) =>
-      state.filter(({ id }) => id !== payload),
+    [fetchContactsSuccess]: (_, action) => action.payload,
+    [addContactSuccess]: (state, action) => [...state, action.payload],
+    [deleteContactSuccess]: (state, action) =>
+      state.filter(({ id }) => id !== action.payload),
   });
   
   const isLoading = createReducer(false, {

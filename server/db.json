@@ -1,0 +1,25 @@
+{
+  "contacts": [
+    {
+      "name": {
+        "name": "Stanislav",
+        "number": "12435345"
+      },
+      "id": 1
+    },
+    {
+      "name": {
+        "name": "qweqerqrweqr",
+        "number": "23443635"
+      },
+      "id": 2
+    },
+    {
+      "name": {
+        "name": "sdg",
+        "number": "34534534"
+      },
+      "id": 3
+    }
+  ]
+}
